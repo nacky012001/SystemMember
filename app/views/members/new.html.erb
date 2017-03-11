@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"><%=I18n.t(:new_member, scope: :members)%></h1>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%=I18n.t(:basic_information, scope: :members)%>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <%= semantic_form_for @member do |f| %>
+          <%= f.inputs :name => I18n.t(:basic_information, scope: :members) do %>
+            <%= f.input :name %>
+            <%= f.input :email, :as => :email %>
+          <% end %>
+          <%= f.actions do %>
+            <%= f.action :submit, :as => :button, :button_html => {:class => "btn btn-primary"} %>
+            <%= f.action :cancel, :as => :link , :button_html => {:class => "btn btn-default"} %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -45,3 +45,6 @@ group :development do
   gem 'spring'
 end
 
+gem 'bootstrap_sb_admin_base_v2'
+
+gem 'formtastic-bootstrap'
