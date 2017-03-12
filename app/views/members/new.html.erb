@@ -12,20 +12,16 @@
     <div class="row">
       <div class="col-lg-6">
         <%= semantic_form_for @member do |f| %>
-          <% if params[:type] && params[:type].to_sym == :upload %>
-            <%= f.inputs :name => I18n.t(:upload_player, scope: :members) do %>
-              <%= f.input :files, :as => :file, :input_html => { :multiple => "" } %>
-              <p class="help-block"><%=I18n.t(:upload_message, scope: :members)%></p>
-            <% end %>
-          <% else %>
-            <%= f.inputs :name => I18n.t(:basic_information, scope: :members) do %>
-              <%= f.input :name %>
-              <%= f.input :email, :as => :email %>
-            <% end %>
+          <%= f.inputs :name => I18n.t(:basic_information, scope: :members) do %>
+            <%= f.input :name %>
+            <%= f.input :email, :as => :email %>
+            <%= f.input :age, :as => :number %>
+            <%= f.input :gender, :as => :select, :collection => [[I18n.t(:male, scope: :members), :male], [I18n.t(:female, scope: :members), :female]] %>
           <% end %>
+
           <%= f.actions do %>
-            <%= f.action :submit, :as => :button, :button_html => {:class => "btn btn-primary"} %>
-            <%= f.action :cancel, :as => :link , :button_html => {:class => "btn btn-default"} %>
+            <%= f.action :submit, :as => :button, :label => I18n.t(:create_member, scope: :members), :button_html => {:class => "btn btn-primary"} %>
+            <%= f.action :cancel, :as => :link, :label => I18n.t(:cancel_member, scope: :members), :button_html => {:class => "btn btn-default"} %>
           <% end %>
         <% end %>
       </div>

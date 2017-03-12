@@ -3,7 +3,6 @@ en:
     member_system: Member System
     logout: Logout
     dashboard: Dashboard
-    search_placeholder: Search...
     members: Members
     charts: Charts
     change_password: Change password
@@ -12,9 +11,16 @@ en:
   members:
     new_member: New member
     create_member: Create member
-    upload_members: Upload members
-    upload_message: Only can upload less than 1000 member records at a time
+    import_members: Import members
+    import_hint: Only can import less than %{val} member records at a time
+    import_title: Files to Import
     basic_information: Basic information
+    import_members: Import members
+    cancel_member: Cancel member
+    male: Male
+    female: Female
+    exceed_maximum_rows: Exceeded the maximum member records in excel
+    parsing_excel_failed: Failed to read excel
   charts:
     gender_distribution: Gender distribution
     age_distribution: Age distribution

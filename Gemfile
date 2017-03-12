@@ -49,4 +49,10 @@ gem 'bootstrap_sb_admin_base_v2'
 
 gem 'formtastic-bootstrap'
 
-gem "chartkick"
+gem 'chartkick'
+
+gem 'roo'
+
+gem 'jquery-rails'
+
+gem 'jquery-datatables-rails'

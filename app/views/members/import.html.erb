@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"><%=I18n.t(:import_members, scope: :members)%></h1>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%=I18n.t(:import_members, scope: :members)%>
+  </div>
+  <div class="panel-body">
+    <% if flash[:error] %>
+      <div class="row">
+        <div class="col-lg-6">
+          <%= I18n.t(flash[:error], scope: :members) %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <%= form_tag preview_members_path, multipart: true do %>
+          <label for="file"><%= I18n.t(:import_title, scope: :members) %></label>
+          <%= file_field_tag "member_files[]", :multiple => true, :accept => '.xlsx' %>
+          <p class="help-block"><%= I18n.t(:import_hint, scope: :members, val: MemberSystem::MemberFilesParser::MAX_ROWS) %></p>
+
+          <%= submit_tag I18n.t(:import_members, scope: :members), :class => "btn btn-primary" %> 
+          <%= link_to I18n.t(:cancel_member, scope: :members), members_path, :class => "btn btn-default" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

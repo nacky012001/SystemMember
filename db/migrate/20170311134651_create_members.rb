@@ -5,7 +5,7 @@ class CreateMembers < ActiveRecord::Migration
       t.string :gender, null: false
       t.integer :age
       t.string :organization
-      t.string :prganization_position
+      t.string :organization_position
       t.string :email, null: false
       t.string :number
       t.string :company
