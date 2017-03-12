@@ -6,9 +6,15 @@ en:
     search_placeholder: Search...
     members: Members
     charts: Charts
+    change_password: Change password
   dashboard:
     current_members: Current members
   members:
     new_member: New member
     create_member: Create member
     upload_members: Upload members
+    upload_message: Only can upload less than 1000 member records at a time
+    basic_information: Basic information
+  charts:
+    gender_distribution: Gender distribution
+    age_distribution: Age distribution

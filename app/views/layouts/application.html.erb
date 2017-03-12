@@ -3,6 +3,7 @@
 <head>
   <title>Workspace</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -27,6 +28,8 @@
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
+            <li><a href="change_password.html"><i class="fa fa-gear fa-fw"></i><%=I18n.t(:change_password, scope: :generic)%></a></li>
+            <li class="divider"></li>
             <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i><%=I18n.t(:logout, scope: :generic)%></a></li>
           </ul>
           <!-- /.dropdown-user -->
@@ -38,17 +41,6 @@
       <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
           <ul class="nav in" id="side-menu">
-            <li class="sidebar-search">
-              <div class="input-group custom-search-form">
-                <input type="text" class="form-control" placeholder=<%=I18n.t(:search_placeholder, scope: :generic)%>>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-              <!-- /input-group -->
-            </li>
             <li>
               <%= link_to root_path do %>
                 <i class="fa fa-dashboard fa-fw"></i><%=I18n.t(:dashboard, scope: :generic)%>
@@ -60,7 +52,9 @@
               <% end %>
             </li>
             <li>
-              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i><%=I18n.t(:charts, scope: :generic)%></a>
+              <%= link_to charts_path do %>
+                <i class="fa fa-table fa-fw"></i><%=I18n.t(:charts, scope: :generic)%>
+              <% end %>
             </li>
           </ul>
         </div>
