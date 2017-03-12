@@ -7,6 +7,7 @@ module MemberSystem
     class << self
       def parse(files)
         parsed_rows = 0
+        records = []
 
         files.each do |file|
           xlsx = Roo::Spreadsheet.open(file)
@@ -14,14 +15,17 @@ module MemberSystem
 
           parsed_rows += sheet.last_row - FIRST_RECORD_ROW + 1
           raise ExceedMaximumRows if parsed_rows > MAX_ROWS
-
-          FIRST_RECORD_ROW.upto(sheet.last_row).map do |row|
-            COLUMNS.each_with_index.inject({}) do |hash, (column_name, col)|
-              hash[column_name] = xlsx.cell(row, col + 1)
-              hash
-            end 
-          end
+      
+          records +=
+            FIRST_RECORD_ROW.upto(sheet.last_row).map do |row|
+              COLUMNS.each_with_index.inject({}) do |hash, (column_name, col)|
+                hash[column_name] = xlsx.cell(row, col + 1)
+                hash
+              end 
+            end
         end
+
+        records
       end
     end 
   end

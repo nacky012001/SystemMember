@@ -53,6 +53,4 @@ gem 'chartkick'
 
 gem 'roo'
 
-gem 'jquery-rails'
-
 gem 'jquery-datatables-rails'

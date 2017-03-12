@@ -1,5 +1,17 @@
 class MembersController < ApplicationController
   def index
+
+  end
+
+  def list
+    members = Member.offset(params[:start]).limit(params[:length]).all
+    count = Member.count
+
+    res = {draw: params[:draw], recordsTotal: count, recordsFiltered: count, data: members.map { |m| m.attributes.symbolize_keys.except(:id, :created_at, :updated_at).values }}
+
+    respond_to do |format|
+      format.json { render json: res.to_json }
+    end
   end
 
   def new
@@ -19,6 +31,15 @@ class MembersController < ApplicationController
   end
 
   def upload
+    begin
+      @records = MemberSystem::MemberFilesParser.parse(params[:member_files])
+      
+      @records.each { |r| Member.create(r) }
+      
+      flash[:message] = [:import_member_records_success, {:val => @records.length}]
+    rescue
+      flash[:error] = :import_member_records_failed
+    end
 
     redirect_to members_path
   end

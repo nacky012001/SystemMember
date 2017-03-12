@@ -3,6 +3,57 @@
     <h1 class="page-header"><%=I18n.t(:members, scope: :generic)%></h1>
   </div>
 </div>
-<%= link_to I18n.t(:create_member, scope: :members), new_member_path, class: "btn btn-outline btn-primary btn-lg" %>
 
-<%= link_to I18n.t(:import_members, scope: :members), import_members_path, class: "btn btn-outline btn-primary btn-lg" %>
+<div class="row" style="padding-bottom: 15px;">
+  <div class="col-lg-12">
+    <%= link_to I18n.t(:create_member, scope: :members), new_member_path, class: "btn btn-outline btn-primary btn-lg" %>
+    <%= link_to I18n.t(:import_members, scope: :members), import_members_path, class: "btn btn-outline btn-primary btn-lg" %>
+  </div>
+</div>
+
+<% if flash[:message] || flash[:error] %>
+  <div class="row">
+    <div class="col-lg-12">
+      <% if flash[:message] %>
+        <%= I18n.t(flash[:message].first, flash[:message].last.symbolize_keys.merge(scope: :members)) %>
+      <% else %>
+        <%= I18n.t(flash[:error], scope: :members) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%=I18n.t(:members, scope: :members)%>
+      </div>
+      <div class="panel-body">
+        <table id="members" class="display" >
+          <thead>
+            <tr>
+              <% MemberSystem::MemberFilesParser::COLUMNS.each do |column| %>
+                <th><%= I18n.t(column, scope: :members) %></th>
+              <% end %>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#members').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        "url": "<%=list_members_path(format: :json)%>",
+        "type": "POST"
+      },
+      responsive: true
+    });
+  });
+</script>

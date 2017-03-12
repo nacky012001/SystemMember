@@ -21,6 +21,23 @@ en:
     female: Female
     exceed_maximum_rows: Exceeded the maximum member records in excel
     parsing_excel_failed: Failed to read excel
+    import_member_records_failed: Import member records failed 
+    import_member_records_success: Total %{val} member record(s) import successfully
+    preivew_member: Preview members
+    members: Members
+    name: Name
+    gender: Gender
+    age: Age
+    organization: Org.
+    organization_position: Org. pos.
+    email: Email
+    number: Number
+    company: Company
+    company_position: Comp. pos.
+    club: Asso.
+    club_position: Asso. pos.
+    position: Position
+    referee: Referee
   charts:
     gender_distribution: Gender distribution
     age_distribution: Age distribution
