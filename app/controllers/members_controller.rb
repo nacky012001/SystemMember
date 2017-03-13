@@ -4,10 +4,16 @@ class MembersController < ApplicationController
   end
 
   def list
-    members = Member.offset(params[:start]).limit(params[:length]).all
-    count = Member.count
+    members = Member
+    records_total = members.count
+    search_condition = params[:columns].map { |_, v| v[:search][:value] }
+    MemberSystem::MemberFilesParser::COLUMNS.each_with_index do |col, idx|
+      members = members.where("#{col} LIKE ?", "#{search_condition[idx]}%") unless search_condition[idx].empty?
+    end
+    records_filtered = members.count
+    members = members.offset(params[:start]).limit(params[:length]).all
 
-    res = {draw: params[:draw], recordsTotal: count, recordsFiltered: count, data: members.map { |m| m.attributes.symbolize_keys.except(:id, :created_at, :updated_at).values }}
+    res = {draw: params[:draw], recordsTotal: records_total, recordsFiltered: records_filtered, data: members.map { |m| m.attributes.symbolize_keys.except(:id, :created_at, :updated_at).values }}
 
     respond_to do |format|
       format.json { render json: res.to_json }

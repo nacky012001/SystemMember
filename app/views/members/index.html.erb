@@ -29,8 +29,8 @@
       <div class="panel-heading">
         <%=I18n.t(:members, scope: :members)%>
       </div>
-      <div class="panel-body">
-        <table id="members" class="display" >
+      <div class="panel-body" id="members-panel-body">
+        <table id="members" class="display">
           <thead>
             <tr>
               <% MemberSystem::MemberFilesParser::COLUMNS.each do |column| %>
@@ -38,6 +38,15 @@
               <% end %>
             </tr>
           </thead>
+          <tfoot>
+            <tr>
+              <% MemberSystem::MemberFilesParser::COLUMNS.each do |column| %>
+                <th>
+                  <input type="text" placeholder=<%= I18n.t(column, scope: :members) %> />
+                </th>
+              <% end %>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -46,14 +55,32 @@
 
 <script>
   $(document).ready(function() {
-    $('#members').DataTable({
+    var table = $('#members').DataTable({
       processing: true,
       serverSide: true,
       ajax: {
         "url": "<%=list_members_path(format: :json)%>",
         "type": "POST"
       },
-      responsive: true
+      responsive: true,
+      dom: '<l<t>ip>',
+      ordering:  false
     });
+
+    table.on('responsive-display', function() { $("#members").css("width", "100%") });
+    table.on('responsive-resize', function() { $("#members").css("width", "100%") });
+    table.on('processing', function() { $("#members").css("width", "100%") });
+
+    table.columns().every(function () {
+      var that = this;
+      $( 'input', this.footer() ).on( 'keyup change', function () {
+        if ( that.search() !== this.value ) {
+          that.search( this.value ).draw();
+        }
+      });
+    });
+  });
+
+  $(window).load(function(){
   });
 </script>
