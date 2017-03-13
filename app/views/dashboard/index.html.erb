@@ -4,21 +4,35 @@
   </div>
   <!-- /.col-lg-12 -->
 </div>
+
 <div class="row">
-  <div class="col-lg-3 col-md-6">
+  <div class="col-lg-6">
     <div class="panel panel-primary">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3">
-              <i class="fa fa-comments fa-5x"></i>
-            </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge"><%=Member.count%></div>
-              <div><%=I18n.t(:current_members, scope: :dashboard)%></div>
-            </div>
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-comments fa-5x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge"><%=Member.count%></div>
+            <div><%=I18n.t(:current_members, scope: :dashboard)%></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%=I18n.t(:members_dashboard, scope: :dashboard)%>
+      </div>
+      <div class="panel-body">
+        <%= line_chart Member.group("DATE(created_at)").count, xtitle: I18n.t(:date, scope: :dashboard), ytitle: I18n.t(:new_members, scope: :dashboard) %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -11,7 +11,7 @@
         <%=I18n.t(:age_distribution, scope: :charts)%>
       </div>
       <div class="panel-body">
-        <%= line_chart "15" => 10, "20" => 30, "25" => 10, "30" => 5, 35 => 10 %>
+        <%= line_chart Member.group(:age).count, xtitle: I18n.t(:age, scope: :members), ytitle: I18n.t(:members, scope: :members) %>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
         <%=I18n.t(:gender_distribution, scope: :charts)%>
       </div>
       <div class="panel-body">
-        <%= pie_chart "Female" => 50, "Male" => 45 %>
+        <%= pie_chart Member.group(:gender).count.map { |k, v| [I18n.t(k.downcase, scope: :charts), v] } %>
       </div>
     </div>
   </div>

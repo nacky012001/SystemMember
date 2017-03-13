@@ -8,6 +8,9 @@ en:
     change_password: Change password
   dashboard:
     current_members: Current members
+    members_dashboard: Members dashboard
+    date: Date
+    new_members: New members
   members:
     new_member: New member
     create_member: Create member
@@ -17,8 +20,6 @@ en:
     basic_information: Basic information
     import_members: Import members
     cancel_member: Cancel member
-    male: Male
-    female: Female
     exceed_maximum_rows: Exceeded the maximum member records in excel
     parsing_excel_failed: Failed to read excel
     import_member_records_failed: Import member records failed 
@@ -38,6 +39,10 @@ en:
     club_position: Asso. pos.
     position: Position
     referee: Referee
+    male: Male
+    female: Female
   charts:
     gender_distribution: Gender distribution
     age_distribution: Age distribution
+    male: Male
+    female: Female
